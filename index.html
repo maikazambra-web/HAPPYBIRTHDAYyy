@@ -5,27 +5,27 @@
 <title>Happy Birthday MECAILA 🎉</title>
 
 <style>
-body {
+body{
   margin:0;
   font-family:Segoe UI,sans-serif;
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
   background:linear-gradient(135deg,#9ad2ff,#fad0c4,#ff9a9e,#a1c4fd);
   background-size:400% 400%;
   animation:gradientBG 15s ease infinite;
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-direction:column;
   color:white;
   text-align:center;
+  overflow-y:auto;
 }
-@keyframes gradientBG {
+@keyframes gradientBG{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
 
-/* INTRO */
 #intro{
   position:fixed; inset:0;
   background:radial-gradient(circle,#ff9a9e,#fad0c4);
@@ -33,20 +33,9 @@ body {
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:999;
-}
-#intro h1{font-size:3em;}
-#intro button{
-  padding:15px 30px;
-  border:none;
-  border-radius:20px;
-  background:#ff5e78;
-  color:white;
-  font-size:1.2em;
-  cursor:pointer;
+  z-index:1000;
 }
 
-/* MAIN */
 h1{
   font-size:3em;
   text-shadow:0 0 10px #fff,0 0 30px hotpink;
@@ -86,16 +75,15 @@ button{
 
 #longMessage{
   margin-top:20px;
-  background:rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.25);
   padding:20px;
   border-radius:15px;
   max-width:600px;
-  max-height:300px;
+  max-height:250px;
   overflow-y:auto;
   white-space:pre-wrap;
 }
 
-/* FLOATING */
 .floating-text{
   position:absolute;
   font-size:2em;
@@ -106,7 +94,18 @@ button{
   100%{transform:translateY(-400px);opacity:0;}
 }
 
-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+canvas{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:1;
+}
+
+#main{
+  position:relative;
+  z-index:5;
+}
 </style>
 </head>
 
@@ -187,7 +186,7 @@ function launchConfetti(){
   let conf=[];
   for(let i=0;i<150;i++){
     conf.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,
-      r:Math.random()*6+4, d:Math.random()*150,color:`hsl(${Math.random()*360},100%,50%)`});
+      r:Math.random()*6+4,color:`hsl(${Math.random()*360},100%,50%)`});
   }
   setInterval(()=>{
     ctx.clearRect(0,0,canvas.width,canvas.height);
